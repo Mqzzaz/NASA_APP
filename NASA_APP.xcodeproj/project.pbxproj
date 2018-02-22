@@ -12,9 +12,11 @@
 		62FB484D203EE7D200C23769 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FB484B203EE7D200C23769 /* Main.storyboard */; };
 		62FB484F203EE7D200C23769 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62FB484E203EE7D200C23769 /* Assets.xcassets */; };
 		62FB4852203EE7D200C23769 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FB4850203EE7D200C23769 /* LaunchScreen.storyboard */; };
+		CE04B4BB962A291C540DAEB9 /* Pods_NASA_APP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CE3A60314AEE85DA16517C0 /* Pods_NASA_APP.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E4B2C7B54904500C8137B98 /* Pods-NASA_APP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NASA_APP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NASA_APP/Pods-NASA_APP.debug.xcconfig"; sourceTree = "<group>"; };
 		62FB4844203EE7D200C23769 /* NASA_APP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NASA_APP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62FB4847203EE7D200C23769 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62FB4849203EE7D200C23769 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,8 @@
 		62FB484E203EE7D200C23769 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62FB4851203EE7D200C23769 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62FB4853203EE7D200C23769 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7A2F8952530B85B71F75331A /* Pods-NASA_APP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NASA_APP.release.xcconfig"; path = "Pods/Target Support Files/Pods-NASA_APP/Pods-NASA_APP.release.xcconfig"; sourceTree = "<group>"; };
+		9CE3A60314AEE85DA16517C0 /* Pods_NASA_APP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NASA_APP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE04B4BB962A291C540DAEB9 /* Pods_NASA_APP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				62FB4846203EE7D200C23769 /* NASA_APP */,
 				62FB4845203EE7D200C23769 /* Products */,
+				F5AEA5F2C94E8CCD005D329D /* Pods */,
+				CB8E2BEDF6077EFB41A07276 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = NASA_APP;
 			sourceTree = "<group>";
 		};
+		CB8E2BEDF6077EFB41A07276 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9CE3A60314AEE85DA16517C0 /* Pods_NASA_APP.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F5AEA5F2C94E8CCD005D329D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5E4B2C7B54904500C8137B98 /* Pods-NASA_APP.debug.xcconfig */,
+				7A2F8952530B85B71F75331A /* Pods-NASA_APP.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62FB4856203EE7D200C23769 /* Build configuration list for PBXNativeTarget "NASA_APP" */;
 			buildPhases = (
+				799D39E53F278D085DF85A97 /* [CP] Check Pods Manifest.lock */,
 				62FB4840203EE7D200C23769 /* Sources */,
 				62FB4841203EE7D200C23769 /* Frameworks */,
 				62FB4842203EE7D200C23769 /* Resources */,
+				22506DA578C7633491F3D737 /* [CP] Embed Pods Frameworks */,
+				2C91AC62BB1B69EE03C32F6E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,62 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		22506DA578C7633491F3D737 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-NASA_APP/Pods-NASA_APP-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NASA_APP/Pods-NASA_APP-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C91AC62BB1B69EE03C32F6E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NASA_APP/Pods-NASA_APP-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		799D39E53F278D085DF85A97 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NASA_APP-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		62FB4840203EE7D200C23769 /* Sources */ = {
@@ -272,6 +355,7 @@
 		};
 		62FB4857203EE7D200C23769 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E4B2C7B54904500C8137B98 /* Pods-NASA_APP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -286,6 +370,7 @@
 		};
 		62FB4858203EE7D200C23769 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A2F8952530B85B71F75331A /* Pods-NASA_APP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
