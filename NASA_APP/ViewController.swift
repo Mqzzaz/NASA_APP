@@ -5,7 +5,6 @@
 //  Copyright © 1439 Mushabab Alasmari. All rights reserved. =
 //============================================================
 
-// TODO:  2) Adding loading element for the API
 // FIXME: 3) Catch Exceptions
 // FIXME: 4) Auto-Layout for variant screens.
 // FIXME: 5) Clean the code.
@@ -33,7 +32,6 @@ struct NASA : Decodable {
         title = nasa.title
         url = nasa.url
     }
-    
 }
 
 class ViewController: UIViewController {
@@ -45,12 +43,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var imgView: UIImageView!
     
     var nasa : NASA?
+    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        startActivityIndicator(indicator: indicator)
         setup()
         getNASA_Data()
+    }
+    
+    func startActivityIndicator(indicator : UIActivityIndicatorView) {
+        
+        indicator.center = self.view.center
+        indicator.hidesWhenStopped = true
+        view.addSubview(indicator)
+        indicator.startAnimating()
     }
     
     func setup() {
@@ -81,6 +89,7 @@ class ViewController: UIViewController {
                 
                 DispatchQueue.main.async(execute: {
                     self.populate(nasa: nasa)
+                    self.stopActivityIndicator(indicator: self.indicator)
                 })
                 
             } catch let jsonErr {
@@ -88,7 +97,6 @@ class ViewController: UIViewController {
             }
             
             }.resume()
-        
     }
     
     func populate(nasa : NASA) {
@@ -119,21 +127,10 @@ class ViewController: UIViewController {
         videoView.isHidden = false
     }
     
-    
-    //  STILL NOT WORKING...
-    
-//    func startActivityIndicator(indicator : UIActivityIndicatorView) {
-//
-//        indicator.center = self.view.center
-//        indicator.hidesWhenStopped = true
-//        view.addSubview(indicator)
-//        indicator.startAnimating()
-//    }
-//
-//    func stopActivityIndicator(indicator : UIActivityIndicatorView) {
-//
-//        indicator.stopAnimating()
-//    }
+    func stopActivityIndicator(indicator : UIActivityIndicatorView) {
+        
+        indicator.stopAnimating()
+    }
     
 }
 
