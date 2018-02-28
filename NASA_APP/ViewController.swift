@@ -1,10 +1,9 @@
-//
-//  ViewController.swift
-//  NASA_APP
-//
-//  Created by Mushabab Alasmari on 06/06/1439 AH.
-//  Copyright © 1439 Mushabab Alasmari. All rights reserved.
-//
+//============================================================
+//  ViewController.swift                                     =
+//  NASA_APP                                                 =
+//  Created by Mushabab Alasmari on 06/06/1439 AH.           =
+//  Copyright © 1439 Mushabab Alasmari. All rights reserved. =
+//============================================================
 
 // TODO:  2) Adding loading element for the API
 // FIXME: 3) Catch Exceptions
@@ -12,72 +11,121 @@
 // FIXME: 5) Clean the code.
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 import youtube_ios_player_helper
 
-class ViewController: UIViewController {
+struct NASA : Decodable
+{
+    var date : String
+    var explanation : String
+    var hdurl : String
+    var media_type : String
+    var service_version : String
+    var title : String
+    var url : String
     
+    init(nasa : NASA) {
+        date = nasa.date
+        explanation = nasa.explanation
+        hdurl = nasa.hdurl
+        media_type = nasa.media_type
+        service_version = nasa.service_version
+        title = nasa.title
+        url = nasa.url
+    }
+}
+
+class ViewController: UIViewController
+{
     @IBOutlet weak var credit: UILabel!
     @IBOutlet weak var textTitle: UILabel!
     @IBOutlet weak var nasaText: UITextView!
     @IBOutlet weak var videoView: YTPlayerView!
     @IBOutlet weak var imgView: UIImageView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        nasaText.backgroundColor = UIColor.clear
-        videoView.backgroundColor = UIColor.clear
-        nasaText.textAlignment = .justified
-        getNASA_Data()
-    }
+    var nasa : NASA?
     
-    override func viewDidAppear(_ animated: Bool) {
-
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        imgView.isHidden = true
+        videoView.isHidden = true
+        nasaText.isHidden = true
+        
+        getNASA_Data()
     }
     
     
     func getNASA_Data()
     {
         let API_key = "NNKOjkoul8n1CH18TWA9gwngW1s1SmjESPjNoUFo"
-        let url = "https://api.nasa.gov/planetary/apod?api_key=\(API_key)"
+        let urlString = "https://api.nasa.gov/planetary/apod?api_key=\(API_key)"
+        let url = URL(string: urlString)
         
-        Alamofire.request(url).response
-            { response in
+        
+        URLSession.shared.dataTask(with: url!) { (data, response, err) in
             
-            let json = JSON(response.data!)
-            let url = json["url"].stringValue
-            
-            if (json["media_type"].stringValue == "image")
+            guard let data = data else { return }
+    
+            do
             {
-                self.setImageView(url: url)
+                let nasa = try
+                    JSONDecoder().decode(NASA.self, from: data)
+
+                DispatchQueue.main.async(execute: {
+                    self.setup(nasa: nasa)
+                })
             }
-            else
+            catch let jsonErr
             {
-                self.setVideoView(url: url)
+                print("Error serializing json: ", jsonErr)
             }
             
-            self.credit.text = json["date"].stringValue
-            self.textTitle.text = json["title"].stringValue
-            self.nasaText.text = json["explanation"].stringValue
-        }
+        }.resume()
+        
+        
     }
     
     func setImageView(url : String)
     {
         let imageData = try? Data(contentsOf: URL(string: url)!)
-        self.imgView.image = UIImage(data: imageData!)
-        self.imgView.isHidden = false
-        self.videoView.isHidden = true
+        imgView.image = UIImage(data: imageData!)
+        imgView.isHidden = false
+        videoView.isHidden = true
     }
     
     func setVideoView(url : String)
     {
         let videoId = url.split(separator: "/").last?
             .split(separator: "?").first
-        self.videoView.load(withVideoId: String(videoId!))
-        self.imgView.isHidden = true
-        self.videoView.isHidden = false
+        videoView.load(withVideoId: String(videoId!))
+        imgView.isHidden = true
+        videoView.isHidden = false
+    }
+    
+    func setup(nasa : NASA)
+    {
+        nasaText.backgroundColor = UIColor.clear
+        videoView.backgroundColor = UIColor.clear
+        nasaText.textAlignment = .justified
+
+        nasa.media_type == "image" ? setImageView(url: nasa.url) : setVideoView(url: nasa.url)
+        credit.text = nasa.date
+        textTitle.text = nasa.title
+        nasaText.text = nasa.explanation
+        nasaText.isHidden = false
+    }
+    
+    func startActivityIndicator(indicator : UIActivityIndicatorView)
+    {
+        indicator.center = view.center
+        indicator.startAnimating()
+        view.addSubview(indicator)
+    }
+    
+    func stopActivityIndicator(indicator : UIActivityIndicatorView)
+    {
+        indicator.stopAnimating()
+        indicator.removeFromSuperview()
     }
 }
 
