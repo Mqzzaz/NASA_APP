@@ -13,8 +13,8 @@
 import UIKit
 import youtube_ios_player_helper
 
-struct NASA : Decodable
-{
+struct NASA : Decodable {
+    
     var date : String
     var explanation : String
     var hdurl : String
@@ -24,6 +24,7 @@ struct NASA : Decodable
     var url : String
     
     init(nasa : NASA) {
+        
         date = nasa.date
         explanation = nasa.explanation
         hdurl = nasa.hdurl
@@ -32,10 +33,11 @@ struct NASA : Decodable
         title = nasa.title
         url = nasa.url
     }
+    
 }
 
-class ViewController: UIViewController
-{
+class ViewController: UIViewController {
+    
     @IBOutlet weak var credit: UILabel!
     @IBOutlet weak var textTitle: UILabel!
     @IBOutlet weak var nasaText: UITextView!
@@ -44,57 +46,72 @@ class ViewController: UIViewController
     
     var nasa : NASA?
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setup()
+        getNASA_Data()
+    }
+    
+    func setup() {
+        
         imgView.isHidden = true
         videoView.isHidden = true
         nasaText.isHidden = true
         
-        getNASA_Data()
+        videoView.backgroundColor = UIColor.clear
+        nasaText.backgroundColor = UIColor.clear
+        nasaText.textAlignment = .justified
+        nasaText.isEditable = false
     }
     
-    
-    func getNASA_Data()
-    {
+    func getNASA_Data() {
+        
         let API_key = "NNKOjkoul8n1CH18TWA9gwngW1s1SmjESPjNoUFo"
         let urlString = "https://api.nasa.gov/planetary/apod?api_key=\(API_key)"
         let url = URL(string: urlString)
         
-        
         URLSession.shared.dataTask(with: url!) { (data, response, err) in
             
             guard let data = data else { return }
-    
-            do
-            {
+            
+            do {
                 let nasa = try
                     JSONDecoder().decode(NASA.self, from: data)
-
+                
                 DispatchQueue.main.async(execute: {
-                    self.setup(nasa: nasa)
+                    self.populate(nasa: nasa)
                 })
-            }
-            catch let jsonErr
-            {
+                
+            } catch let jsonErr {
                 print("Error serializing json: ", jsonErr)
             }
             
-        }.resume()
-        
+            }.resume()
         
     }
     
-    func setImageView(url : String)
-    {
+    func populate(nasa : NASA) {
+        
+        nasa.media_type == "image" ? setImageView(url: nasa.url)
+            : setVideoView(url: nasa.url)
+        
+        credit.text = nasa.date
+        textTitle.text = nasa.title
+        nasaText.text = nasa.explanation
+        nasaText.isHidden = false
+    }
+    
+    func setImageView(url : String) {
+        
         let imageData = try? Data(contentsOf: URL(string: url)!)
         imgView.image = UIImage(data: imageData!)
         imgView.isHidden = false
         videoView.isHidden = true
     }
     
-    func setVideoView(url : String)
-    {
+    func setVideoView(url : String) {
+        
         let videoId = url.split(separator: "/").last?
             .split(separator: "?").first
         videoView.load(withVideoId: String(videoId!))
@@ -102,30 +119,21 @@ class ViewController: UIViewController
         videoView.isHidden = false
     }
     
-    func setup(nasa : NASA)
-    {
-        nasaText.backgroundColor = UIColor.clear
-        videoView.backgroundColor = UIColor.clear
-        nasaText.textAlignment = .justified
-
-        nasa.media_type == "image" ? setImageView(url: nasa.url) : setVideoView(url: nasa.url)
-        credit.text = nasa.date
-        textTitle.text = nasa.title
-        nasaText.text = nasa.explanation
-        nasaText.isHidden = false
-    }
     
-    func startActivityIndicator(indicator : UIActivityIndicatorView)
-    {
-        indicator.center = view.center
-        indicator.startAnimating()
-        view.addSubview(indicator)
-    }
+    //  STILL NOT WORKING...
     
-    func stopActivityIndicator(indicator : UIActivityIndicatorView)
-    {
-        indicator.stopAnimating()
-        indicator.removeFromSuperview()
-    }
+//    func startActivityIndicator(indicator : UIActivityIndicatorView) {
+//
+//        indicator.center = self.view.center
+//        indicator.hidesWhenStopped = true
+//        view.addSubview(indicator)
+//        indicator.startAnimating()
+//    }
+//
+//    func stopActivityIndicator(indicator : UIActivityIndicatorView) {
+//
+//        indicator.stopAnimating()
+//    }
+    
 }
 
