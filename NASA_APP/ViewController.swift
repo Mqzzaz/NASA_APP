@@ -5,9 +5,10 @@
 //  Copyright © 1439 Mushabab Alasmari. All rights reserved. =
 //============================================================
 
-// FIXME: 3) Catch Exceptions
-// FIXME: 4) Auto-Layout for variant screens.
-// FIXME: 5) Clean the code.
+// TODO: 1) Use CoreData to store NASA data and check the DATE before fetching data from the API
+//          if stored date = today no need to fetch else fetch new data from API
+// TODO: 2) Auto-Layout for variant screens.
+// TODO: 3) Clean the code.
 
 import UIKit
 import youtube_ios_player_helper
@@ -81,7 +82,17 @@ class ViewController: UIViewController {
         
         URLSession.shared.dataTask(with: url!) { (data, response, err) in
             
-            guard let data = data else { return }
+            guard err == nil else {
+                self.textTitle.text = "Ops!, there is a problem with the network"
+                print("check URLSession -> gurd err")
+                return
+            }
+            
+            guard let data = data else {
+                self.textTitle.text = "Ops!, there is a problem with the network"
+                print("check URLSession -> gurd data")
+                return
+            }
             
             do {
                 let nasa = try
