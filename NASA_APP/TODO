@@ -1,0 +1,12 @@
+
+
+NASA App TODO List:
+
+  ☐  Use CoreData to store NASA data and check the DATE before fetching data from the API, if stored date = today no need to fetch new data else fetch new data from API. @high @created(18-03-04 10:58)
+
+  ☐  Auto-Layout for variant screens. @high @created(18-03-04 10:58)
+
+  ☐  Clean the code. @low @created(18-03-04 10:58)
+
+
+  --- ✄ --------------------------------------------------------------------------------------------------
