@@ -17,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		5E4B2C7B54904500C8137B98 /* Pods-NASA_APP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NASA_APP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NASA_APP/Pods-NASA_APP.debug.xcconfig"; sourceTree = "<group>"; };
+		62F90D8F2046C9F1006D040F /* NASA.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NASA.xcdatamodel; sourceTree = "<group>"; };
 		62FB4844203EE7D200C23769 /* NASA_APP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NASA_APP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62FB4847203EE7D200C23769 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62FB4849203EE7D200C23769 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 				62FB484E203EE7D200C23769 /* Assets.xcassets */,
 				62FB4850203EE7D200C23769 /* LaunchScreen.storyboard */,
 				62FB4853203EE7D200C23769 /* Info.plist */,
+				62F90D8E2046C9F1006D040F /* NASA.xcdatamodeld */,
 			);
 			path = NASA_APP;
 			sourceTree = "<group>";
@@ -407,6 +409,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		62F90D8E2046C9F1006D040F /* NASA.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				62F90D8F2046C9F1006D040F /* NASA.xcdatamodel */,
+			);
+			currentVersion = 62F90D8F2046C9F1006D040F /* NASA.xcdatamodel */;
+			path = NASA.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 62FB483C203EE7D200C23769 /* Project object */;
 }
